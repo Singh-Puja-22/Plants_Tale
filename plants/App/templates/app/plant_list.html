@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+<!-- <!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>List</title>
+  </head>
+  <body> -->
+{% block content %}
+<div class="row row-cols-1 row-cols-md-5 g-4">
+  {% for p in plant_list %}   
+  <div class="col">
+    <div class="card">
+    <a href="{% url 'plantdetail' p.pk %}">
+      <img src="{{ p.img }}" height="200" width="100" class="card-img-top" />
+    </a>
+      <div class="card-body">
+        <h5 class="card-title">{{ p.name }}</h5>
+        <p class="card-text">
+          Rs.{{ p.price }}.
+        </p>
+        <div class="row">
+            <div class="col-sm-6">
+                  <p class="card-text">{{ p.sunlight_requirements }} </p>
+            </div>
+            <div class="col-sm-6">
+              <p class="card-text">{{ p.watering_needs }}</p>
+            </div>
+          </div>
+        
+        <!-- <a href="#" class="btn btn-primary"></a> -->
+      </div>
+    </div>
+  </div>
+  </div>
+  {% endfor %}
+</div>
+{% endblock %}
+<!-- </body>
+</html> -->

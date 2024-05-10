@@ -1,0 +1,8 @@
+.home {
+  padding: 3rem;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 4rem;
+  flex-direction: row;
+}
