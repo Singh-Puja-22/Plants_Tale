@@ -12,15 +12,37 @@
       crossorigin="anonymous"
     />
 
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+    />
+
+    <!-- <script src="{% static '/js/style.js' %}"></script> -->
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+      crossorigin="anonymous"
+    ></script>
     <link href="{% static '/css/style.css' %}" rel="stylesheet" />
+
     <title>{% block title %}{% endblock %}</title>
   </head>
   <body>
     <!-- Header -->
 
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav
+      class="navbar navbar-expand-lg navbar-light"
+      style="background-color: white"
+    >
       <div class="container-fluid">
-        <a class="navbar-brand" href="#">Navbar</a>
+        <a class="navbar-brand" href="/"
+          ><img
+            style="mix-blend-mode: multiply"
+            src="{% static '/images/logo.png' %}"
+            length="40"
+            width="40"
+        /></a>
         <button
           class="navbar-toggler"
           type="button"
@@ -35,55 +57,64 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
-              <a
-                class="nav-link active"
-                aria-current="page"
-                href="{% url 'home' %}"
-                >Home</a
+              <a class="nav-link" aria-current="page" href="{% url 'home' %}"
+                ><b>Home</b></a
               >
             </li>
+
+            {% if user.is_superuser %}
             <li class="nav-item">
-              <a class="nav-link" href="#">Link</a>
+              <a class="nav-link" href="{% url 'add' %}"><b>Add Plants</b></a>
             </li>
-            <li class="nav-item dropdown">
-              <a
-                class="nav-link dropdown-toggle"
-                href="#"
-                id="navbarDropdown"
-                role="button"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-              >
-                Dropdown
+            {% endif %}
+
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'list' %}"><b>Plants</b></a>
+            </li>
+
+            {% if user.is_authenticated %}
+
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'cart:view_cart' %}">
+                <b>Cart</b>
               </a>
-              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <li><a class="dropdown-item" href="#">Action</a></li>
-                <li><a class="dropdown-item" href="#">Another action</a></li>
-                <li><hr class="dropdown-divider" /></li>
-                <li>
-                  <a class="dropdown-item" href="#">Something else here</a>
-                </li>
-              </ul>
             </li>
             <li class="nav-item">
-              <a
-                class="nav-link disabled"
-                href="#"
-                tabindex="-1"
-                aria-disabled="true"
-                >Disabled</a
+              <form method="post" action="{% url 'logout' %}">
+                {%csrf_token %}
+                <button class="btn btn-secondary" type="submit">Logout</button>
+              </form>
+            </li>
+
+            {% else %}
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'register' %}"
+                ><b>Register</b></a
               >
             </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'login' %}"><b>Login</b></a>
+            </li>
+            {% endif %}
           </ul>
-          <form class="d-flex">
+
+          <form class="d-flex" method="get" action="{% url 'search' %}">
             <input
+              name="q"
               class="form-control me-2"
               type="search"
               placeholder="Search"
               aria-label="Search"
             />
-            <button class="btn btn-outline-success" type="submit">
-              Search
+            <button
+              class="btn btn-outline-success"
+              type="submit"
+              style="color: rgb(164, 214, 174)"
+            >
+              <!-- <i class="fa-solid fa-magnifying-glass"></i> -->
+              <!-- <a class="fas fa-search"></a> -->
+              <i class="fas fa-search" style="color: #45a157"></i>
+              <!-- <a href="" class="fab fa-facebook-f"></a> -->
             </button>
           </form>
         </div>

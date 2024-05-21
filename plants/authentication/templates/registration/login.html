@@ -1,0 +1,56 @@
+{% extends 'base.html' %} {% block content %}
+
+<div class="form-group">
+  <form
+    method="POST"
+    style="border: 3px solid #f1f1f1; margin: 150px 400px 150px 400px"
+  >
+    {% csrf_token %} 
+    <!-- {{ form.as_p}} -->
+
+    <div class="container" style="padding: 16px;
+    margin: 16px;">
+      <label for="id_username"><b>Username</b></label>
+      <input style="width: 100%;
+      padding: 12px 20px;
+      margin: 8px 0;
+      display: inline-block;
+      border: 1px solid #ccc;
+      box-sizing: border-box;" 
+      type="text" 
+      placeholder="Enter Username" 
+      name="username"
+      maxlength="150" required id="id_username"/>
+
+      <label for="id_password"><b>Password</b></label>
+      <input style="width: 100%;
+      padding: 12px 20px;
+      margin: 8px 0;
+      display: inline-block;
+      border: 1px solid #ccc;
+      box-sizing: border-box;"
+        type="password"
+        placeholder="Enter Password"
+        name="password"
+        autocomplete="current-password"
+        required id="id_password"
+      />
+
+
+    <button
+      class="btn btn-secondary"
+      style="
+        background-color: #04aa6d;
+        color: white;
+        padding: 14px 20px;
+        margin: 8px 0;
+        border: none;
+        cursor: pointer;
+        width: 100%;
+      "
+    >
+      Sign in
+    </button>
+  </form>
+</div>
+{% endblock %}

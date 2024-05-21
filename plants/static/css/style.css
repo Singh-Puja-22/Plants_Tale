@@ -6,3 +6,12 @@
   gap: 4rem;
   flex-direction: row;
 }
+
+/* .accordion .card-header:after {
+  font-family: "FontAwesome";
+  content: "\f068";
+  float: right;
+}
+.accordion .card-header.collapsed:after {
+  content: "\f068";
+} */

@@ -1,0 +1,55 @@
+{% extends 'base.html' %} {% block content %}
+<center>
+  <div class="container">
+    <h1>Your Shopping Cart</h1>
+
+    <div>
+      <!-- <div>
+      <p>{{ item.plant.name }} ({{ item.quantity }})</p>
+      <p>Price: ${{ item.plant.price }}</p>
+    </div> -->
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Product</th>
+            <th scope="col">Quantity</th>
+            <th scope="col">Sub total</th>
+          </tr>
+        </thead>
+        {% for item in cart_items %}
+        <tbody>
+          <tr>
+            <td>
+              <div class="row">
+                <div class="col-md-2">
+                  <img
+                    src="{{ item.plant.img.url }}"
+                    height="100"
+                    width="100"
+                  />
+                </div>
+                <div class="col-md-4">
+                  <p>{{ item.plant.name }}</p>
+                  <p>Rs.{{ item.plant.price }}</p>
+                </div>
+                <div class="col-md-2">
+                  <a href="{% url 'cart:remove_from_cart' item.id %}">Remove</a>
+                </div>
+              </div>
+            </td>
+            <td>{{ item.quantity }}</td>
+            <td>{{ item.sub_total }}</td>
+          </tr>
+        </tbody>
+        {% empty %}
+        <p>Your cart is empty.</p>
+        {% endfor %}
+      </table>
+    </div>
+
+    <p>Total Price: ${{ total_price }}</p>
+
+    <a href="{% url 'list' %}">Continue Shopping</a>
+  </div>
+</center>
+{% endblock %}

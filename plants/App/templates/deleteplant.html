@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h1>Delete Plant</h1>
+
+<h3>Delete: {{ plant.name }} </h3>
+
+<div class="form-group">
+    <form method="POST">
+        {%csrf_token %}
+        <strong>Confirm to delete the plant</strong>
+        <button class="btn btn-danger">Confirm</button>
+    </form>
+</div>
+
+{% endblock %}
