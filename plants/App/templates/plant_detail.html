@@ -5,14 +5,14 @@
       <div class="col-sm-6">
         <div class="card">
           <div class="card-body">
-            <div class="card" style="border: 0cap;">
+            <div class="card" style="border: 0cap">
               <div class="card-body">
                 <img src="{{ plant.img.url }}" height="300" width="350" />
               </div>
             </div>
 
             <br />
-            
+
             <div class="accordion" id="accordionExample">
               <div class="accordion-item">
                 <h2 class="accordion-header" id="headingOne">
@@ -92,7 +92,12 @@
               class="btn btn-danger"
               >Add to Cart</a
             >
-            <button class="btn btn-primary">Buy Now</button>
+            <a
+              href="{% url 'cart:buy_now' plant.id %}"
+              class="btn btn-primary"
+              >Buy Now</a
+            >
+            <!-- <button class="btn btn-primary">Buy Now</button> -->
             <hr />
 
             <div class="row">

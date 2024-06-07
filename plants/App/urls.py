@@ -2,7 +2,6 @@ from django.urls import path
 
 from app import views
 
-
 urlpatterns = [
     path('', views.Home, name='home'),
     path('add', views.PlantCreate.as_view(), name='add'),

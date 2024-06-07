@@ -1,4 +1,5 @@
 from django.shortcuts import redirect, render
+from django.urls import reverse
 
 from cart.models import CartItem
 from app.models import Plant
@@ -14,6 +15,13 @@ def view_cart(request):
     return render(request, template, {'cart_items': cart_items, 'total_price': total_price})
 
 def add_to_cart(request, plant_id):
+    plant = Plant.objects.get(id=plant_id)
+    cart_item, created = CartItem.objects.get_or_create(plant=plant, user=request.user)
+    cart_item.quantity += 1
+    cart_item.save()
+    return redirect(reverse('plantdetail', args=[plant_id]))
+
+def buy_now(request, plant_id):
     plant = Plant.objects.get(id=plant_id)
     cart_item, created = CartItem.objects.get_or_create(plant=plant, user=request.user)
     cart_item.quantity += 1
