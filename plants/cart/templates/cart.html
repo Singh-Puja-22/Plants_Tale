@@ -4,10 +4,6 @@
     <h1>Your Shopping Cart</h1>
 
     <div>
-      <!-- <div>
-      <p>{{ item.plant.name }} ({{ item.quantity }})</p>
-      <p>Price: ${{ item.plant.price }}</p>
-    </div> -->
       <table class="table">
         <thead>
           <tr>
@@ -32,12 +28,30 @@
                   <p>{{ item.plant.name }}</p>
                   <p>Rs.{{ item.plant.price }}</p>
                 </div>
-                <div class="col-md-2">
+                <!-- <div class="col-md-2">
                   <a href="{% url 'cart:remove_from_cart' item.id %}">Remove</a>
-                </div>
+                </div> -->
               </div>
             </td>
-            <td>{{ item.quantity }}</td>
+            <td>
+              <form
+                action="{% url 'cart:decrement_cart_item' item.id %}"
+                method="post"
+                style="display: inline"
+              >
+                {% csrf_token %}
+                <button type="submit">-</button>
+              </form>
+              {{ item.quantity }}
+              <form
+                action="{% url 'cart:increment_cart_item' item.id %}"
+                method="post"
+                style="display: inline"
+              >
+                {% csrf_token %}
+                <button type="submit">+</button>
+              </form>
+            </td>
             <td>{{ item.sub_total }}</td>
           </tr>
         </tbody>
@@ -47,9 +61,10 @@
       </table>
     </div>
 
-    <p>Total Price: ${{ total_price }}</p>
+    <p>Total Price: Rs. {{ total_price }}</p>
 
     <a href="{% url 'list' %}">Continue Shopping</a>
   </div>
 </center>
+
 {% endblock %}

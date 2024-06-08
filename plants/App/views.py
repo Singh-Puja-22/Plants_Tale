@@ -8,7 +8,8 @@ from app.models import Plant
 # Create your views here.
 def Home(request):
     template = loader.get_template('home.html')
-    return HttpResponse(template.render())
+    return HttpResponse(template.render({},request))
+    # return render(request, 'home.html')
 
 class PlantCreate(CreateView):
     model = Plant
